@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Cat Facts</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <link href="/stylesheets/style.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <div class="container">
+            <h2>Cat Facts List</h2>        
+            <table class="table">
+                <tbody>
+
+                    <% if (data) { // If data has bee passed to this page.
+                    for (let i = 0; i < data.length; i ++ ) { // Loop through the elements of data (data is array).
+                    let cf = data[i]; // Obtain element.
+                    %>
+
+                    <!-- Add rows to the table and display the result. -->
+                    <tr>
+                        <td>
+                            <h4>Text <span class="badge badge-primary"><%= cf.text %></span></h4>
+                            <h4>Type <span class="badge badge-secondary"><%= cf.type %></span></h4>
+                            <h4>ID <span class="badge badge-info"><%= cf._id %></span></h4>
+                            <h4>User <span class="badge success"><%= cf.user %></span></h4>
+                            <h4>Source <span class="badge badge-warning"><%= cf.source %></span></h4>
+                            <h4>Updated at <span class="badge badge-danger"><%= cf.updatedAt %></span></h4>
+                            <h4>Created at <span class="badge badge-danger"><%= cf.createdAt %></span></h4>
+                        </td>
+                    </tr>
+
+                    <% 
+                    }
+                    // Case when no elements loaded from API.
+                    } else {%>
+                    No Facts
+                    <% }%>
+                </tbody>
+            </table>
+
+            <ul class="pagination">
+                <%
+                for (let j = 1; j <= numPages; j ++) { // Iterate over passed 
+                // numPages to create page items.
+                %>
+                <!-- Here href has a parameter 'page' to specify number of page 
+                that should be loaded after the user clicks on the page item. -->
+                <li class="page-item"><a class="page-link" href="?page=<%= j%>"><%= j%></a></li>               
+                <%
+                }
+                %>
+            </ul>
+
+        </div>
+    </body>
+</html>
